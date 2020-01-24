@@ -4,7 +4,7 @@
     "keywords": ["laravel", "uuid", "ulid"],
     "type": "library",
     "require": {
-        "robinvdvleuten/ulid": "^4.0",
+        "robinvdvleuten/ulid": "^4.0"
     },
     "license": "Apache-2.0",
     "authors": [{

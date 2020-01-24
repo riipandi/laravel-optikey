@@ -12,12 +12,14 @@ composer require riipandi/laravel-optikey
 
 This package adds a very simple trait to automatically generate a UUID or Ulid for your Models.
 
-## Using UUID
+## Quick Start
 
-First, you need to add uuid column in your migration. For example:
+### Update your tables schema
+
+First, you need to add uuid or ulid column in your migration. For example:
 
 ```sh
-php artisan make:migration AddUlidColumnToUsersTable
+php artisan make:migration AddUuidColumnToUsersTable
 ```
 
 In this case you will use UUID as secondary key:
@@ -32,7 +34,9 @@ In this case you will use UUID as primary key:
 $table->uuid('id')->primary();
 ```
 
-Then add the "\Riipandi\LaravelOptiKey\Traits\HasUuidKey;" trait to your model:
+### Using UUID
+
+Add the "\Riipandi\LaravelOptiKey\Traits\HasUuidKey;" trait to your model:
 
 ```php
 <?php
@@ -42,11 +46,9 @@ namespace App;
 use Riipandi\LaravelOptiKey\Traits\HasUuidKey;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class User extends Model
 {
-
     use HasUuidKey;
-
 }
 ```
 
@@ -59,13 +61,13 @@ protected $uuidFieldName = 'unique_id';
 This trait also adds a scope:
 
 ```php
-\App\Project::byUuid('uuid')->first();
+\App\User::byUuid('uuid')->first();
 ```
 
 And static find method:
 
 ```php
-\App\Project::findByUuid('uuid')
+\App\User::findByUuid('uuid')
 ```
 
 A second trait is available if you use your UUIDs as primary keys:
@@ -79,11 +81,62 @@ use Riipandi\LaravelOptiKey\Traits\HasUuidKey;
 use Riipandi\LaravelOptiKey\Traits\UuidAsPrimaryKey;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class User extends Model
 {
-
     use HasUuidKey, UuidAsPrimaryKey;
+}
+```
 
+### Using Ulid
+
+Add the "\Riipandi\LaravelOptiKey\Traits\HasUlidKey;" trait to your model:
+
+```php
+<?php
+
+namespace App;
+
+use Riipandi\LaravelOptiKey\Traits\HasUlidKey;
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    use HasUlidKey;
+}
+```
+
+If your column name is not "ulid", simply add a new property to your model named "ulidFieldName":
+
+```php
+protected $ulidFieldName = 'unique_id';
+```
+
+This trait also adds a scope:
+
+```php
+\App\User::byUlid('ulid')->first();
+```
+
+And static find method:
+
+```php
+\App\User::findByUlid('ulid')
+```
+
+A second trait is available if you use your Ulids as primary keys:
+
+```php
+<?php
+
+namespace App;
+
+use Riipandi\LaravelOptiKey\Traits\HasUlidKey;
+use Riipandi\LaravelOptiKey\Traits\UlidAsPrimaryKey;
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    use HasUlidKey, UlidAsPrimaryKey;
 }
 ```
 

@@ -1,0 +1,27 @@
+{
+    "name": "riipandi/laravel-optikey",
+    "description": "Use UUID or Ulid as optional or primary key in Laravel.",
+    "keywords": ["laravel", "uuid", "ulid"],
+    "type": "library",
+    "require": {
+        "robinvdvleuten/ulid": "^4.0",
+    },
+    "license": "Apache-2.0",
+    "authors": [{
+        "name": "Aris Ripandi",
+        "email": "aris@ripandi.id"
+    }],
+    "autoload": {
+        "psr-4": {
+            "Riipandi\\LaravelOptiKey\\": "src/"
+        }
+    },
+    "autoload-dev":{
+        "psr-4": {
+            "Riipandi\\LaravelOptiKey\\Tests\\": "tests"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">5.0"
+    }
+}

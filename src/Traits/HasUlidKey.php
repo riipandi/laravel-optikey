@@ -8,8 +8,8 @@ trait HasUlidKey
     {
         static::creating(function ($model) {
             $ulidFieldName = $model->getUlidFieldName();
-            if (empty($model->$ulidFieldName)) {
-                $model->$ulidFieldName = self::generateUlid();
+            if (empty($model->{$ulidFieldName})) {
+                $model->{$ulidFieldName} = self::generateUlid();
             }
         });
     }
@@ -23,11 +23,6 @@ trait HasUlidKey
         return 'ulid';
     }
 
-    protected static function generateUlid()
-    {
-        return (string) \Ulid\Ulid::generate();
-    }
-
     public function scopeByUlid($query, $ulid)
     {
         return $query->where($this->getUlidFieldName(), $ulid);
@@ -36,5 +31,10 @@ trait HasUlidKey
     public static function findByUlid($ulid)
     {
         return static::byUlid($ulid)->first();
+    }
+
+    protected static function generateUlid()
+    {
+        return (string) \Ulid\Ulid::generate();
     }
 }

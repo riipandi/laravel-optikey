@@ -1,6 +1,6 @@
 <?php
 
-namespace Riipandi\Options\Tests;
+namespace Riipandi\LaravelOptiKey\Tests;
 
 use PHPUnit\Framework\TestCase;
 

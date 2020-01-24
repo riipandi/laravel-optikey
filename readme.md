@@ -15,7 +15,7 @@ This package adds a very simple trait to automatically generate a UUID or Ulid f
 
 ## Quick Start
 
-### Update your tables schema
+### Update your schemas
 
 First, you need to add uuid or ulid column in your migration. For example:
 

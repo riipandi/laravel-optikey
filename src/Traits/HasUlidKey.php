@@ -16,7 +16,7 @@ trait HasUlidKey
 
     public function getUlidFieldName()
     {
-        if (!empty($this->ulidFieldName)) {
+        if (! empty($this->ulidFieldName)) {
             return $this->ulidFieldName;
         }
 

@@ -5,6 +5,7 @@
     "type": "library",
     "require": {
         "php": ">=7.1",
+        "laravel/framework": "^6.0",
         "robinvdvleuten/ulid": "^4.0"
     },
     "license": "Apache-2.0",

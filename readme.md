@@ -14,7 +14,25 @@ This package adds a very simple trait to automatically generate a UUID or Ulid f
 
 ## Using UUID
 
-Simply add the "\Riipandi\LaravelOptiKey\Traits\HasUuidKey;" trait to your model:
+First, you need to add uuid column in your migration. For example:
+
+```sh
+php artisan make:migration AddUlidColumnToUsersTable
+```
+
+In this case you will use UUID as secondary key:
+
+```php
+$table->uuid('uuid')->after('id')->unique()->index();
+```
+
+In this case you will use UUID as primary key:
+
+```php
+$table->uuid('id')->primary();
+```
+
+Then add the "\Riipandi\LaravelOptiKey\Traits\HasUuidKey;" trait to your model:
 
 ```php
 <?php

@@ -35,6 +35,33 @@ In this case you will use UUID as primary key:
 $table->uuid('id')->primary();
 ```
 
+Sample migration:
+
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class AddUlidColumnToUsersTable extends Migration
+{
+    public function up()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('ulid', 26)->unique()->index()->after('id');
+        });
+    }
+    
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('ulid');
+        });
+    }
+}
+```
+
 ### Using UUID
 
 Add the "\Riipandi\LaravelOptiKey\Traits\HasUuidKey;" trait to your model:

@@ -7,10 +7,14 @@ trait HasUlidKey
     public static function bootHasUlidKey()
     {
         static::creating(function ($model) {
+
             $ulidFieldName = $model->getUlidFieldName();
+            $ulidLowerCase = $model->getUlidLowerCase();
+
             if (empty($model->{$ulidFieldName})) {
-                $model->{$ulidFieldName} = self::generateUlid();
+                $model->{$ulidFieldName} = self::generateUlid($ulidLowerCase);
             }
+
         });
     }
 
@@ -42,8 +46,8 @@ trait HasUlidKey
         return static::byUlid($ulid)->first();
     }
 
-    protected static function generateUlid()
+    protected static function generateUlid($lowercase = false)
     {
-        return (string) \Ulid\Ulid::generate(self::getUlidLowerCase());
+        return (string) \Ulid\Ulid::generate($lowercase);
     }
 }

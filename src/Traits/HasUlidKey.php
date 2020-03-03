@@ -23,6 +23,15 @@ trait HasUlidKey
         return 'ulid';
     }
 
+    public function getUlidLowerCase()
+    {
+        if (! empty($this->ulidLowerCase)) {
+            return $this->ulidLowerCase;
+        }
+
+        return false;
+    }
+
     public function scopeByUlid($query, $ulid)
     {
         return $query->where($this->getUlidFieldName(), $ulid);
@@ -35,6 +44,6 @@ trait HasUlidKey
 
     protected static function generateUlid()
     {
-        return (string) \Ulid\Ulid::generate();
+        return (string) \Ulid\Ulid::generate(self::getUlidLowerCase());
     }
 }

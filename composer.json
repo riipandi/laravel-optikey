@@ -4,7 +4,7 @@
     "keywords": ["laravel", "uuid", "ulid"],
     "type": "library",
     "require": {
-        "php": ">=7.2.1",
+        "php": ">=7.2.5",
         "laravel/framework": "^5.8|^6.0|^7.0",
         "robinvdvleuten/ulid": "^4.0"
     },

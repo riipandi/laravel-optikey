@@ -7,19 +7,19 @@ trait HasUlidKey
     public static function bootHasUlidKey()
     {
         static::creating(function ($model) {
-            $ulidFieldName = $model->getUlidFieldName();
+            $optiKeyFieldName = $model->getoptiKeyFieldName();
             $ulidLowerCase = $model->getUlidLowerCase();
 
-            if (empty($model->{$ulidFieldName})) {
-                $model->{$ulidFieldName} = self::generateUlid($ulidLowerCase);
+            if (empty($model->{$optiKeyFieldName})) {
+                $model->{$optiKeyFieldName} = self::generateUlid($ulidLowerCase);
             }
         });
     }
 
-    public function getUlidFieldName()
+    public function getoptiKeyFieldName()
     {
-        if (! empty($this->ulidFieldName)) {
-            return $this->ulidFieldName;
+        if (! empty($this->optiKeyFieldName)) {
+            return $this->optiKeyFieldName;
         }
 
         return 'ulid';
@@ -36,7 +36,7 @@ trait HasUlidKey
 
     public function scopeByUlid($query, $ulid)
     {
-        return $query->where($this->getUlidFieldName(), $ulid);
+        return $query->where($this->getoptiKeyFieldName(), $ulid);
     }
 
     public static function findByUlid($ulid)

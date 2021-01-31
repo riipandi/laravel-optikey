@@ -80,10 +80,10 @@ class User extends Model
 }
 ```
 
-If your column name is not "uuid", simply add a new property to your model named "uuidFieldName":
+If your column name is not "uuid", simply add a new property to your model named "optiKeyFieldName":
 
 ```php
-protected $uuidFieldName = 'unique_id';
+protected $optiKeyFieldName = 'unique_id';
 ```
 
 This trait also adds a scope:
@@ -133,10 +133,10 @@ class User extends Model
 }
 ```
 
-If your column name is not "ulid", simply add a new property to your model named "ulidFieldName":
+If your column name is not "ulid", simply add a new property to your model named "optiKeyFieldName":
 
 ```php
-protected $ulidFieldName = 'unique_id';
+protected $optiKeyFieldName = 'unique_id';
 ```
 
 This trait also adds a scope:
@@ -170,17 +170,11 @@ class User extends Model
 
 It simply tells Laravel that your primary key isn't an auto-incrementing integer, so it will treat the value correctly.
 
-## License
+## Copyright
+This project is licensed under MIT: <https://aris.mit-license.org/>
 
-Copyright 2020 - Aris Ripandi
+Copyrights in this project are retained by their contributors.
+No copyright assignment is required to contribute to this project.
+Please see [license file](./license.txt) for more information.
 
-Licensed under the [Apache License][choosealicense], Version 2.0 (the "License"); you may not use this
-file except in compliance with the License. You may obtain a copy of the License at:
-<http://www.apache.org/licenses/LICENSE-2.0>
-
-Unless required by applicable law or agreed to in writing, software distributed under
-the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-ANY KIND, either express or implied. See the License for the specific language
-governing permissions and limitations under the License.
-
-[choosealicense]:https://choosealicense.com/licenses/apache-2.0/
+[choosealicense]:https://choosealicense.com/licenses/mit/

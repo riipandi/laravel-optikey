@@ -9,17 +9,17 @@ trait HasUuidKey
     public static function bootHasUuidKey()
     {
         static::creating(function ($model) {
-            $uuidFieldName = $model->getUuidFieldName();
-            if (empty($model->$uuidFieldName)) {
-                $model->$uuidFieldName = self::generateUuid();
+            $optiKeyFieldName = $model->getoptiKeyFieldName();
+            if (empty($model->$optiKeyFieldName)) {
+                $model->$optiKeyFieldName = self::generateUuid();
             }
         });
     }
 
-    public function getUuidFieldName()
+    public function getoptiKeyFieldName()
     {
-        if (! empty($this->uuidFieldName)) {
-            return $this->uuidFieldName;
+        if (! empty($this->optiKeyFieldName)) {
+            return $this->optiKeyFieldName;
         }
 
         return 'uuid';
@@ -32,7 +32,7 @@ trait HasUuidKey
 
     public function scopeByUuid($query, $uuid)
     {
-        return $query->where($this->getUuidFieldName(), $uuid);
+        return $query->where($this->getoptiKeyFieldName(), $uuid);
     }
 
     public static function findByUuid($uuid)

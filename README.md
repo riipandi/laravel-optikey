@@ -4,6 +4,7 @@
 [![StyleCI](https://github.styleci.io/repos/235965192/shield?branch=master)](https://github.styleci.io/repos/235965192)
 [![Latest Stable Version](http://img.shields.io/packagist/v/riipandi/laravel-optikey.svg?style=flat)](https://packagist.org/packages/riipandi/laravel-optikey)
 [![Total Downloads](http://img.shields.io/packagist/dt/riipandi/laravel-optikey.svg?style=flat)](https://packagist.org/packages/riipandi/laravel-optikey)
+[![Treeware](https://img.shields.io/badge/dynamic/json?color=brightgreen&label=Treeware&query=%24.total&url=https%3A%2F%2Fpublic.offset.earth%2Fusers%2Ftreeware%2Ftrees)](https://treeware.earth)
 
 Use UUID or Ulid as optional or primary key in Laravel.
 
@@ -170,7 +171,8 @@ class User extends Model
 
 It simply tells Laravel that your primary key isn't an auto-incrementing integer, so it will treat the value correctly.
 
-## Copyright
+## Licence
+
 This project is licensed under MIT: <https://aris.mit-license.org/>
 
 Copyrights in this project are retained by their contributors.
@@ -178,3 +180,5 @@ No copyright assignment is required to contribute to this project.
 Please see [license file](./license.txt) for more information.
 
 [choosealicense]:https://choosealicense.com/licenses/mit/
+
+This package is [Treeware](https://treeware.earth). If you use it in production, then we ask that you [**buy the world a tree**](https://plant.treeware.earth/riipandi/laravel-optikey) to thank us for our work. By contributing to the Treeware forest you’ll be creating employment for local families and restoring wildlife habitats.

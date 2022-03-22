@@ -173,12 +173,13 @@ It simply tells Laravel that your primary key isn't an auto-incrementing integer
 
 ## Licence
 
-This project is licensed under MIT: <https://aris.mit-license.org/>
+This project is licensed under MIT: <https://aris.mit-license.org>
 
 Copyrights in this project are retained by their contributors.
 No copyright assignment is required to contribute to this project.
-Please see [license file](./license.txt) for more information.
 
 [choosealicense]:https://choosealicense.com/licenses/mit/
 
 This package is [Treeware](https://treeware.earth). If you use it in production, then we ask that you [**buy the world a tree**](https://plant.treeware.earth/riipandi/laravel-optikey) to thank us for our work. By contributing to the Treeware forest you’ll be creating employment for local families and restoring wildlife habitats.
+
+Please see [license file](./license.txt) for more information.

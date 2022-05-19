@@ -58,6 +58,6 @@ trait HasUlidKey
     {
         $generated = \Ulid\Ulid::generate($lowercase);
 
-        return (string) $prefix ? $prefix . $generated : $generated;
+        return (string) $prefix ? $prefix.$generated : $generated;
     }
 }

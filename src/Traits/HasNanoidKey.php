@@ -62,7 +62,7 @@ trait HasNanoidKey
         $customAlphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         $uid = $client->formattedId($alphabet = $customAlphabet, $size = $length);
-        $generated = $prefix ? $prefix . $uid : $uid;
+        $generated = $prefix ? $prefix.$uid : $uid;
         $finalStr = $lowercase == true ? strtolower($generated) : $generated;
 
         return (string) $finalStr;

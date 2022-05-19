@@ -1,6 +1,6 @@
 # Laravel OptiKey
 
-[![Build Status](https://travis-ci.org/riipandi/laravel-optikey.svg?branch=master)](https://travis-ci.org/riipandi/laravel-optikey)
+[![Build Status](https://travis-ci.com/riipandi/laravel-optikey.svg?branch=master)](https://travis-ci.com/riipandi/laravel-optikey)
 [![StyleCI](https://github.styleci.io/repos/235965192/shield?branch=master)](https://github.styleci.io/repos/235965192)
 [![Latest Stable Version](http://img.shields.io/packagist/v/riipandi/laravel-optikey.svg?style=flat)](https://packagist.org/packages/riipandi/laravel-optikey)
 [![Total Downloads](http://img.shields.io/packagist/dt/riipandi/laravel-optikey.svg?style=flat)](https://packagist.org/packages/riipandi/laravel-optikey)

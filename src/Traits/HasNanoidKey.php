@@ -2,9 +2,11 @@
 
 namespace Riipandi\LaravelOptiKey\Traits;
 
-trait HasUlidKey
+use Hidehalo\OptiKey\Client;
+
+trait HasNanoidKey
 {
-    public static function bootHasUlidKey()
+    public static function bootHasNanoidKey()
     {
         static::creating(function ($model) {
             $optiKeyFieldName = $model->getOptiKeyFieldName();
@@ -12,7 +14,7 @@ trait HasUlidKey
             $optiKeyPrefix = $model->getOptiKeyPrefix();
 
             if (empty($model->{$optiKeyFieldName})) {
-                $model->{$optiKeyFieldName} = self::generateId($optiKeyPrefix, $optiKeyLowerCase);
+                $model->{$optiKeyFieldName} = self::generateId(16, $optiKeyPrefix, $optiKeyLowerCase);
             }
         });
     }
@@ -23,7 +25,7 @@ trait HasUlidKey
             return $this->optiKeyFieldName;
         }
 
-        return 'ulid';
+        return 'nanoid';
     }
 
     public function getOptiKeyLowerCase()
@@ -54,10 +56,15 @@ trait HasUlidKey
         return static::byOptiKey($uid)->first();
     }
 
-    protected static function generateId($prefix = '', $lowercase = false)
+    protected static function generateId($length = 16, $prefix = '', $lowercase = false)
     {
-        $generated = \Ulid\Ulid::generate($lowercase);
+        $client = new Client();
+        $customAlphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-        return (string) $prefix ? $prefix . $generated : $generated;
+        $uid = $client->formattedId($alphabet = $customAlphabet, $size = $length);
+        $generated = $prefix ? $prefix . $uid : $uid;
+        $finalStr = $lowercase == true ? strtolower($generated) : $generated;
+
+        return (string) $finalStr;
     }
 }

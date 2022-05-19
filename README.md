@@ -6,34 +6,30 @@
 [![Total Downloads](http://img.shields.io/packagist/dt/riipandi/laravel-optikey.svg?style=flat)](https://packagist.org/packages/riipandi/laravel-optikey)
 [![Treeware](https://img.shields.io/badge/dynamic/json?color=brightgreen&label=Treeware&query=%24.total&url=https%3A%2F%2Fpublic.offset.earth%2Fusers%2Ftreeware%2Ftrees)](https://treeware.earth)
 
-Use UUID or Ulid as optional or primary key in Laravel.
+Use UUID, Ulid, or nanoid as optional or primary key in Laravel.
 
 ```bash
 composer require riipandi/laravel-optikey
 ```
 
-This package adds a very simple trait to automatically generate a UUID or Ulid for your Models.
+This package adds a very simple trait to automatically generate a UUID, Ulid, or nanoid for your Models.
 
-## Quick Start
+## ✌️ Using as Secondary Key
 
-### Update your schemas
+### 1. Update your schemas
 
-First, you need to add uuid or ulid column in your migration. For example:
+First, you need to add an extra column in your migration. For example:
 
 ```sh
-php artisan make:migration AddUuidColumnToUsersTable
+php artisan make:migration AddUidColumnToUsersTable
 ```
 
-In this case you will use UUID as secondary key:
-
 ```php
-$table->uuid('uuid')->after('id')->unique()->index();
-```
+// If using UUID for the key
+$table->uuid('uid')->after('id')->unique()->index();
 
-In this case you will use UUID as primary key:
-
-```php
-$table->uuid('id')->primary();
+// If using nanoid or ulid for the key
+$table->string('uid')->after('id')->unique()->index();
 ```
 
 Sample migration:
@@ -45,131 +41,103 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUlidColumnToUsersTable extends Migration
+class AddUidColumnToUsersTable extends Migration
 {
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('ulid', 26)->unique()->index()->after('id');
+            $table->string('uid', 26)->unique()->index()->after('id');
         });
     }
-    
+
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('ulid');
+            $table->dropColumn('uid');
         });
     }
 }
 ```
 
-### Using UUID
+### 2. Add the trait
 
-Add the "\Riipandi\LaravelOptiKey\Traits\HasUuidKey;" trait to your model:
+Add the trait to your model (pick one between `HasUuidKey`, `HasUlidKey`, or `HasNanoidKey`):
 
 ```php
 <?php
 
 namespace App;
 
-use Riipandi\LaravelOptiKey\Traits\HasUuidKey;
 use Illuminate\Database\Eloquent\Model;
+use Riipandi\LaravelOptiKey\Traits\HasNanoidKey;
 
 class User extends Model
 {
-    use HasUuidKey;
+    use HasNanoidKey;
+
+    protected $optiKeyFieldName = 'uid';   // mandatory (you can change this field name)
+    protected $optiKeyLowerCase = true;    // optional (default: false)
+    protected $optiKeyPrefix = 'user_';    // optional (default: null)
+
+    ....
 }
 ```
 
-If your column name is not "uuid", simply add a new property to your model named "optiKeyFieldName":
+### 3. Get Record using the key
+
+Using scope:
 
 ```php
-protected $optiKeyFieldName = 'unique_id';
+\App\User::byOptiKey('xxxxxxxxxxx')->first();
 ```
 
-This trait also adds a scope:
+Or, using static find method:
 
 ```php
-\App\User::byUuid('uuid')->first();
+\App\User::findByOptiKey('xxxxxxxxxxx')
 ```
 
-And static find method:
+## ☝️ Using as Primary Key
+
+You need to change the primary key field type in your migration. For example:
 
 ```php
-\App\User::findByUuid('uuid')
+$table->uuid('id')->primary();         // for UUID
+$table->string('id', 26)->primary();   // for Ulid
+$table->string('id', 16)->primary();   // for nanoid
 ```
 
-A second trait is available if you use your UUIDs as primary keys:
+Add second trait to use as primary key:
 
 ```php
 <?php
 
 namespace App;
 
-use Riipandi\LaravelOptiKey\Traits\HasUuidKey;
-use Riipandi\LaravelOptiKey\Traits\UuidAsPrimaryKey;
 use Illuminate\Database\Eloquent\Model;
-
-class User extends Model
-{
-    use HasUuidKey, UuidAsPrimaryKey;
-}
-```
-
-### Using Ulid
-
-Add the "\Riipandi\LaravelOptiKey\Traits\HasUlidKey;" trait to your model:
-
-```php
-<?php
-
-namespace App;
-
 use Riipandi\LaravelOptiKey\Traits\HasUlidKey;
-use Illuminate\Database\Eloquent\Model;
+use Riipandi\LaravelOptiKey\Traits\OptiKeyAsPrimary;
 
 class User extends Model
 {
     use HasUlidKey;
-}
-```
+    use OptiKeyAsPrimary;
 
-If your column name is not "ulid", simply add a new property to your model named "optiKeyFieldName":
+    protected $optiKeyFieldName = 'id';
 
-```php
-protected $optiKeyFieldName = 'unique_id';
-```
-
-This trait also adds a scope:
-
-```php
-\App\User::byUlid('ulid')->first();
-```
-
-And static find method:
-
-```php
-\App\User::findByUlid('ulid')
-```
-
-A second trait is available if you use your Ulids as primary keys:
-
-```php
-<?php
-
-namespace App;
-
-use Riipandi\LaravelOptiKey\Traits\HasUlidKey;
-use Riipandi\LaravelOptiKey\Traits\UlidAsPrimaryKey;
-use Illuminate\Database\Eloquent\Model;
-
-class User extends Model
-{
-    use HasUlidKey, UlidAsPrimaryKey;
+    ...
 }
 ```
 
 It simply tells Laravel that your primary key isn't an auto-incrementing integer, so it will treat the value correctly.
+
+## 📝 Important Note
+
+You can use `prefix` option to add a prefix to the generated key.
+
+- [x] Default lengt for Ulid is 26 characters.
+- [x] Default length for nanoid is 16 characters.
+- [x] If you want to use prefix, set larger length.
 
 ## Licence
 

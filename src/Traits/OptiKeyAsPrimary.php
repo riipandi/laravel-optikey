@@ -2,7 +2,7 @@
 
 namespace Riipandi\LaravelOptiKey\Traits;
 
-trait UuidAsPrimaryKey
+trait OptiKeyAsPrimary
 {
     public function getIncrementing()
     {

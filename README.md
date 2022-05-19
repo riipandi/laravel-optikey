@@ -21,7 +21,7 @@ This package adds a very simple trait to automatically generate a UUID, Ulid, or
 First, you need to add an extra column in your migration. For example:
 
 ```sh
-php artisan make:migration AddUidColumnToUsersTable
+php artisan make:migration AddOptikeyToUsersTable
 ```
 
 ```php
@@ -41,7 +41,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUidColumnToUsersTable extends Migration
+class AddOptikeyToUsersTable extends Migration
 {
     public function up()
     {

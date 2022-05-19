@@ -37,16 +37,32 @@ Sample migration:
 ```php
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class AddUidColumnToUsersTable extends Migration
+class AddOptikeyToUsersTable extends Migration
 {
     public function up()
     {
+        // Add uid column to users table
         Schema::table('users', function (Blueprint $table) {
-            $table->string('uid', 26)->unique()->index()->after('id');
+            $table->string('uid', 26)->index()->after('id');
+        });
+
+        // Prefill uid column in users table
+        Schema::table('users', function (Blueprint $table) {
+            $results = DB::table('users')->select('id')->get();
+            foreach ($results as $result) {
+                $ulid = \Ulid\Ulid::generate($lowercase = true); // Generate new lowercase Ulid
+                $generated = 'user_'.$ulid; // this is the generated value with optional prefix
+                DB::table('users')->where('id', $result->id)->update(['uid' => $generated]);
+            }
+        });
+
+        // Set uid column as unique
+        Schema::table('users', function (Blueprint $table) {
+            $table->unique('uid');
         });
     }
 
@@ -94,7 +110,7 @@ Using scope:
 Or, using static find method:
 
 ```php
-\App\User::findByOptiKey('xxxxxxxxxxx')
+\App\User::findByOptiKey('xxxxxxxxxxx');
 ```
 
 ## ☝️ Using as Primary Key

@@ -2,7 +2,7 @@
 
 namespace Riipandi\LaravelOptiKey\Traits;
 
-use Hidehalo\OptiKey\Client;
+use Hidehalo\Nanoid\Client;
 
 trait HasNanoidKey
 {
